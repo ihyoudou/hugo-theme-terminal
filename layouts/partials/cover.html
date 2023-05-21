@@ -2,15 +2,15 @@
 {{- $autoCover := default $.Site.Params.autoCover false }}
 
 {{- if index .Params "cover" -}}
-  {{- if .Resources.GetMatch .Params.Cover }}
-    {{- $cover = (.Resources.GetMatch .Params.Cover).RelPermalink -}}
+  {{- if resources.GetMatch .Params.Cover }}
+    {{- $cover = ((resources.GetMatch .Params.Cover).Resize "800x webp").RelPermalink -}}
   {{- else -}}
     {{- $cover = absURL .Params.Cover -}}
   {{- end -}}
 {{- else if $.Site.Params.AutoCover -}}
   {{- if (not .Params.Cover) -}}
-    {{- if .Resources.GetMatch "cover.*" -}}
-      {{- $cover = (.Resources.GetMatch "cover.*").RelPermalink -}}
+    {{- if resources.GetMatch "cover.*" -}}
+      {{- $cover = (resources.GetMatch "cover.*").RelPermalink -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
